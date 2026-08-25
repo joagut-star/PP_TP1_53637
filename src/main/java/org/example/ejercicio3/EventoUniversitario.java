@@ -1,0 +1,109 @@
+package org.example.ejercicio3;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class EventoUniversitario {
+    private final String id;
+    private String titulo;
+    private double costoBase;
+    private boolean gratuito;
+    private static int cantidadEventos;
+
+
+    private Sala sala;
+
+    public EventoUniversitario(String id) {
+        this.id = id;
+    }
+
+    public EventoUniversitario(String id, String titulo, double costoBase, boolean gratuito) {
+        this.id = id;
+        this.titulo = titulo;
+        this.costoBase = costoBase;
+        this.gratuito = gratuito;
+        cantidadEventos++;
+    }
+    public EventoUniversitario(EventoUniversitario obj){
+        this.id = obj.id;
+        this.titulo = obj.titulo;
+        this.costoBase = obj.costoBase;
+        this.gratuito = obj.gratuito;
+        cantidadEventos++;
+    }
+    public double calcularCostoEstimado(){
+        double total = costoBase;
+        if(gratuito) {
+            return 0.0;
+        }
+
+        for (Taller ta: talleres){
+            total += ta.calcularCostoMateriales();
+        }
+        return total * 1.21;
+
+    }
+
+
+    public void asignarSala(Sala sala){
+        this.sala = sala;
+        System.out.println("El evento de " + this.titulo + " tiene asignado el " + sala.getNombre());
+    }
+    public void mostrarDatos(){
+        System.out.println("ID: " + this.id);
+        System.out.println(this.titulo);
+        System.out.println("Costo " + this.costoBase);
+        if (gratuito){
+            System.out.println("Es gratis.");
+        } else {
+            System.out.println("No es gratis.");
+        }
+        System.out.println("Sala: " + this.sala.getNombre());
+
+        System.out.println("Talleres:");
+
+        for ( Taller ta: talleres) {
+
+            System.out.println(ta.getTitulo());
+            ta.mostrarIdentificación();
+            System.out.println("--------");
+
+        }
+
+        System.out.println("Charlas:");
+        for ( Charla cha: charlas) {
+
+            System.out.println(cha.getTitulo());
+            cha.mostrarIdentificación();
+            System.out.println("--------");
+        }
+
+
+    }
+
+    public static int getCantidadEventos() {
+        return cantidadEventos;
+    }
+
+
+    List<Taller> talleres = new ArrayList<>();
+    List<Charla> charlas = new ArrayList<>();
+
+    public void crearActividad(int idAct, String tituloAct, int cupo, String tipoAct, boolean reqNot, String diser){
+        if (tipoAct.equalsIgnoreCase("Taller")) {
+            Taller taller = new Taller(idAct, tituloAct, cupo, reqNot );
+            talleres.add(taller);
+        }
+        else if (tipoAct.equalsIgnoreCase("Charla")) {
+            Charla charla = new Charla(idAct, tituloAct, cupo, diser  );
+            charlas.add(charla);
+        }
+
+    }
+
+
+
+
+
+}
+
