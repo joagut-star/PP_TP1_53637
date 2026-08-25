@@ -26,7 +26,7 @@ Conceptos de POO Aplicados
 ---
 
 Archivos del Repositorio
-- Código Fuente**: Proyecto IntelliJ listo para clonar y ejecutar (`src/App.java`).
+- Código Fuente: Proyecto IntelliJ listo para clonar y ejecutar (`src/App.java`).
 - mapa_memoria.png: Gráfico representativo del Heap y Stack en ejecución (Ejercicio 4).
 - captura_consola.png: Captura con la salida por consola del programa.
 
